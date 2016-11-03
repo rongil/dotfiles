@@ -1,0 +1,8 @@
+set adjust-open "width"
+set font "Droid Sans Mono 12"
+
+set selection-clipboard clipboard
+
+#set recolor true
+set recolor-darkcolor  "#EEEEEE"
+set recolor-lightcolor "#000000"
