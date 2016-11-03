@@ -1,0 +1,19 @@
+#!/bin/bash
+
+autocomplete () {
+  local script=$1
+  local script_name=$(basename $1)
+  # Commands are prefixed by script name, xargs is to remove newlines
+  local commands=$(grep -oP "(?<="$script_name"_)\S+(?=\s\(\))" $script | xargs)
+
+  if [ "$commands" ]; then
+    complete -o default -o nospace -W "$commands" $script_name
+  fi
+}
+
+# Set autocompletion for all (readable AND executable) scripts in scripts folder
+for script in $HOME/scripts/* ; do
+  if [ -x $script ]; then
+    autocomplete $script
+  fi
+done
