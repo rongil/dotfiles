@@ -75,7 +75,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 # Other aliases
-alias config='/usr/bin/git --git-dir=$HOME/.config_vc/ --work-tree=$HOME' # Dotfile version control
+alias config='/usr/bin/git --git-dir=$HOME/.config_store/ --work-tree=$HOME' # Dotfile version control
 alias feh='feh --auto-zoom --scale-down' # Adjust size for tiled windows
 alias l='ls'
 alias la='ls -A' # Convenient for listing hidden files
