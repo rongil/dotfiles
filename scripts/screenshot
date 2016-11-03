@@ -1,0 +1,42 @@
+#!/bin/bash
+
+screenshot_all () {
+  local time=$(date +%F_%H-%M-%S)
+  local name="screenshot_$time.png"
+  import -window root $name
+
+  save_notification $name
+}
+
+screenshot_select () {
+  local pid=$(ps -eo cmd,pid | grep -P '^import screenshot_.+' | rev | cut -d' ' -f 1 | rev)
+
+  # Check if import is already running
+  if (( $pid ))
+  then
+    kill $pid
+  else
+    local time=$(date +%F_%H-%M-%S)
+    local name="screenshot_$time.png"
+
+    import $name&
+
+    # Notify that it was stored if sucessful
+    wait $! && save_notification $name
+  fi
+}
+
+save_notification () {
+  local name=$1
+  local small_img="/tmp/small_$name"
+
+  # Make a temporary small version of the screenshot for the notification
+  convert $name -resize 100x100\> $small_img # \> means only shrink (i.e. don't enlarge)
+  notify-send "Screenshot Saved" $name -i $small_img
+
+  sleep 15
+  rm $small_img
+}
+
+
+screenshot_$1

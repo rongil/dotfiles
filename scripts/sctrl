@@ -1,0 +1,77 @@
+#!/bin/bash
+
+ICONS_DIR="$HOME/.config/i3/img/icons"
+LOCKER_STATE_DIR="$HOME/.local/state"
+LOCKER_STATE_FILE="$LOCKER_STATE_DIR/sctrl_locker"
+
+get_locker_state () {
+  if [ ! -d $LOCKER_STATE_DIR  ]; then
+    mkdir -p $LOCKER_STATE_DIR
+  fi
+
+  if [ ! -f $LOCKER_STATE_FILE ]; then
+    echo 0 > $LOCKER_STATE_FILE
+  fi
+
+  echo $(<$LOCKER_STATE_FILE)
+}
+
+set_locker_state () {
+  if [ ! -d $LOCKER_STATE_DIR  ]; then
+    mkdir -p $LOCKER_STATE_DIR
+  fi
+
+  echo $1 > $LOCKER_STATE_FILE
+}
+
+sctrl_disable () {
+  xautolock -disable
+  set_locker_state 0
+  notify-send "Screen Control" "Screen dimming is now off." -i "$ICONS_DIR/bulbgraph_off.png"
+}
+
+sctrl_enable () {
+  xautolock -enable
+  set_locker_state 1
+  # NOTE: Extra space at end so notifications are of equal size.
+  notify-send "Screen Control" "Screen dimming is now on. " -i "$ICONS_DIR/bulbgraph.png"
+}
+
+sctrl_lock () {
+  sctrl_enable
+  sleep 1 # Make sure xautolock has time to be reenabled.
+  xautolock -locknow
+}
+
+sctrl_output () {
+  # Switch up screen outputs.
+  if [ `xrandr | grep -c ' connected '` -ge 2 ]; then
+    if [ `xrandr | grep VGA-0 | grep -c ' connected '` -eq 1 ]; then
+      xrandr --output LVDS-0 --auto --primary --output VGA-0 --auto --right-of LVDS-0
+    fi
+    if [ `xrandr | grep HDMI-0 | grep -c ' connected '` -eq 1 ]; then
+      xrandr --output LVDS-0 --auto --primary --output HDMI-0 --auto --right-of LVDS-0
+    fi
+  else
+    xrandr --output LVDS-0 --auto --primary --output VGA-0 --off --output HDMI-0 --off
+  fi
+
+  $HOME/.fehbg
+}
+
+sctrl_suspend () {
+  sleep 0.5 # Leave time so any further key presses detected are ignored
+  xset dpms force suspend;
+}
+
+sctrl_toggle () {
+  if  [[ $(get_locker_state) == "1" ]]
+  then
+    sctrl_disable
+  else
+    sctrl_enable
+  fi
+}
+
+
+sctrl_$1

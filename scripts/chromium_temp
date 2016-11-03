@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Creates a chromium instance with a temporary profile
+chromium_create_instance () {
+  # Create a directory to hold new instances
+  local instances_dir="/tmp/chromium_temporary_instances"
+  if [ ! -e $instances_dir ]; then
+    mkdir $instances_dir
+  fi
+
+  # Find a random empty directory
+  local destination_dir="$instances_dir/chromium_instance_$RANDOM"
+  while [ -e $destination_dir ]; do
+    destination_dir="$instances_dir/chromium_instance_$RANDOM"
+  done
+
+  # Copy over real profile and remove the locks + session data
+  cp -r "$HOME/.config/chromium" $destination_dir
+  rm -r $destination_dir/{Singleton,Session}*
+
+  chromium --user-data-dir=$destination_dir --incognito&
+  wait $!
+  rm -r $destination_dir # Remove the directory once the instance is closed
+
+  # Remove the instances directory if this was the last instance
+  if [ -z "$(ls -A $instances_dir)" ]; then
+    rmdir $instances_dir
+  fi
+}
+
+
+chromium_create_instance

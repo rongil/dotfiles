@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Run the provided command only if not already running.
+if [[ $(pgrep -c $1) -eq 0 ]]
+then
+  $@
+fi

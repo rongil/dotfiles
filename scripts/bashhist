@@ -1,0 +1,36 @@
+#!/bin/bash
+
+#=================================================
+# Adapted from: http://stackoverflow.com/a/7449399
+#=================================================
+
+# Remove history duplicates while preserving input order
+bashhist_dedupe () {
+   local verbose=$(test "$1" == "-v" && echo true || echo false)
+   local HISTFILE_SRC=$HOME/.bash_history
+   local HISTFILE_DST=/tmp/.$USER.bash_history.clean
+
+   if [ -f $HISTFILE_SRC ]; then
+     $verbose && echo "Making backup..."
+     cp $HISTFILE_SRC $HISTFILE_SRC.backup
+
+     $verbose && echo "Creating clean history..."
+     awk '! x[$0]++' $HISTFILE_SRC > $HISTFILE_DST
+
+     $verbose && echo "Replacing old history..."
+     mv $HISTFILE_DST $HISTFILE_SRC
+
+     $verbose && echo "Removing read permission..."
+     chmod go-r $HISTFILE_SRC
+
+     $verbose && echo "Clearing history in history library..."
+     history -c
+
+     $verbose && echo "Appending clean history to history library..."
+     history -r
+
+     $verbose && echo "Done!"
+   fi
+}
+
+bashhist_$1 $2 # Second option is for verbosity
