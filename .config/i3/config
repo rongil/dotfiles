@@ -242,12 +242,9 @@ bar {
 focus_follows_mouse no # Must click for mouse to grab focus of window
 
 # Autostart
-exec --no-startup-id mydropbox enable # Dropbox itself checks if this is the first instance
+exec --no-startup-id mydropbox enable # Dropbox checks if this is the first instance
 exec --no-startup-id singleton dunst
 exec --no-startup-id singleton clipster -d
 exec --no-startup-id singleton libinput-gestures-setup start
-exec --no-startup-id redshift # Just have this on all GUI instances for the eyes' sake...
-exec --no-startup-id xautolock -time 5 -locker i3lock-dpms \
--notify 15 -notifier 'notify-send -t 10000 -i ~/.config/i3/img/icons/lock.png "Screen is about to lock..."' \
--killtime 10 -killer 'systemctl suspend' \
--corners +-0- -cornerdelay 5 -cornerredelay 5 # xautolock checks that it is the only instance
+exec --no-startup-id redshift # Just have this on all instances for the eyes' sake...
+exec --no-startup-id xautolock # xautolock checks that it is the only instance

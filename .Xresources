@@ -1,0 +1,9 @@
+Xautolock.time: 5
+Xautolock.locker: i3lock-dpms
+Xautolock.notify: 15
+Xautolock.notifier: notify-send -t 10000 -i ~/.config/i3/img/icons/lock.png "Screen is about to lock..."
+Xautolock.killtime: 10
+Xautolock.killer: systemctl suspend
+Xautolock.corners: +-0-
+Xautolock.cornerdelay: 3
+Xautolock.cornerredelay: 5

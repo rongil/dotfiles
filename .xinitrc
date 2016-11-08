@@ -1,3 +1,6 @@
+# Load Xresources
+[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+
 # Turn off bell
 xset -b
 
