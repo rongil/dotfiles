@@ -1,0 +1,5 @@
+# color the right and bottom edges of maximized gvim windows
+style "gvim" {
+    bg[NORMAL] = "#000000"
+}
+widget "vim-main-window.*GtkForm" style "gvim"

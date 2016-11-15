@@ -30,6 +30,17 @@ set lazyredraw "Don't redraw while performing untyped commands (e.g. macros)
 set clipboard=unnamed
 
 "==============================================================================
+" GUI Options (since some applications launch GVim by default)
+"==============================================================================
+if has('gui_running')
+  set guifont=Source\ Code\ Pro\ 12
+  set guioptions-=m "No menu bar
+  set guioptions-=r "No right scroll bar
+  set guioptions-=L "No left scroll bar
+  set guioptions-=T "No toolbar
+endif
+
+"==============================================================================
 " Swap File Settings
 "==============================================================================
 "Only have swap file if file is currently in modified state
