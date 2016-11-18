@@ -63,8 +63,9 @@ command Q q
 "<C-L> (redraw screen) also turns off search highlight until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-"Jump to outside of parentheses when inside
-inoremap <C-J> <ESC>%%a
+"Split lines (opposite of J)
+"Source: http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
+nnoremap <S-K> ciW<CR><Esc>:if match( @", "^\\s*$") < 0<Bar>exec "norm P-$diw+"<Bar>endif<CR>
 
 "==============================================================================
 " Indentation
