@@ -65,7 +65,7 @@ nnoremap <C-L> :nohl<CR><C-L>
 
 "Split lines (opposite of J)
 "Source: http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
-nnoremap <S-K> ciW<CR><Esc>:if match( @", "^\\s*$") < 0<Bar>exec "norm P-$diw+"<Bar>endif<CR>
+nnoremap K ciW<CR><Esc>:if match( @", "^\\s*$") < 0<Bar>exec "norm P-$diw+"<Bar>endif<CR>
 
 "==============================================================================
 " Indentation
