@@ -185,9 +185,9 @@ bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 10"
 bindsym XF86MonBrightnessUp   exec --no-startup-id "xbacklight -inc 10"
 
 # Volume keys
-bindcode 121 exec --no-startup-id "amixer -q sset Master toggle"
-bindcode 122 exec --no-startup-id "amixer -q sset Master 3%- unmute"
-bindcode 123 exec --no-startup-id "amixer -q sset Master 3%+ unmute"
+bindsym XF86AudioMute exec --no-startup-id "amixer -q sset Master toggle"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q sset Master 3%- unmute"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q sset Master 3%+ unmute"
 
 # Force kill window
 bindsym --release $mod+Control+x exec --no-startup-id xkill
