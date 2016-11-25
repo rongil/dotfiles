@@ -29,6 +29,9 @@ set lazyredraw "Don't redraw while performing untyped commands (e.g. macros)
 "X window clipboard (without storing in clipboard unless + register specified)
 set clipboard=unnamed
 
+"Delete comment character when joining commented lines
+set formatoptions+=j
+
 "==============================================================================
 " GUI Options (since some applications launch GVim by default)
 "==============================================================================
