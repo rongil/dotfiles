@@ -31,6 +31,7 @@ Plugin 'fatih/vim-go' "Go syntax, autocomplete, etc.
 Plugin 'pangloss/vim-javascript' "Better JS syntax + indentation
 Plugin 'heavenshell/vim-jsdoc' "JSDoc creator
 Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'andrewradev/splitjoin.vim' "Switch between single/multi-line
 Plugin 'tpope/vim-endwise' "End functions/structures automatically
 Plugin 'tpope/vim-ragtag' "Tag manipulation mappings (e.g. in HTML, XML, etc.)
 Plugin 'tpope/vim-repeat' "Repeat plugin commands with .

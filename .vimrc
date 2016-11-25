@@ -195,6 +195,12 @@ au FileType go nmap <leader>f :<C-u>GoFmt<CR>
 let g:tern_show_argument_hints='on_hold'
 
 "==============================================================================
+" SplitJoin
+"==============================================================================
+let g:splitjoin_split_mapping = 'gK'
+let g:splitjoin_join_mapping = 'gJ'
+
+"==============================================================================
 " Syntastic
 "==============================================================================
 let g:syntastic_always_populate_loc_list = 1 "Always fill in error list
