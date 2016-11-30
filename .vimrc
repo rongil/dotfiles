@@ -22,8 +22,7 @@ set splitbelow "Opens new horizontal window under
 autocmd BufWritePre * :%s/\v\s+$//e
 
 set mouse=a "Enable use of the mouse for all modes (already enabled by term emulator)
-set visualbell "Don't ring bell when doing something wrong
-set t_vb= "Also don't show flash from visual bell
+set visualbell t_vb= "Don't ring or flash bell
 set lazyredraw "Don't redraw while performing untyped commands (e.g. macros)
 
 "X window clipboard (without storing in clipboard unless + register specified)
@@ -35,12 +34,14 @@ set formatoptions+=j
 "==============================================================================
 " GUI Options (since some applications launch GVim by default)
 "==============================================================================
+autocmd GUIEnter * set visualbell t_vb= "Don't ring or flash bell in gvim
 if has('gui_running')
   set guifont=Source\ Code\ Pro\ 12
   set guioptions-=m "No menu bar
   set guioptions-=r "No right scroll bar
   set guioptions-=L "No left scroll bar
   set guioptions-=T "No toolbar
+  set guicursor=n:blinkon0 "Don't blink cursor in normal mode
 endif
 
 "==============================================================================
