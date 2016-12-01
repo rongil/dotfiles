@@ -104,5 +104,5 @@ mkcd () {
 new () {
   # Runs as a substitution to avoid the
   # 'sent to background' + job id output
-  `nohup termite &>/dev/null& disown`
+  `nohup termite &>/dev/null&`
 }
