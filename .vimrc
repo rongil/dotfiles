@@ -233,6 +233,11 @@ inoremap <F2> <C-O>:SyntasticToggleMode<CR>
 nnoremap <leader>% :MtaJumpToOtherTag<CR>
 
 "==============================================================================
+" Ragtag
+"==============================================================================
+let g:ragtag_global_maps = 1 "Use provided default mappings
+
+"==============================================================================
 " NERD Commenter
 "==============================================================================
 map gc <plug>NERDCommenterToggle
