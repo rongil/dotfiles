@@ -20,11 +20,12 @@
   wds = diff --word-diff --staged
 
   # Log
-  ls = log --pretty="format:'%C(yellow)%h %C(blue)[%aN] %C(auto)%G?%d %C(white)%s'" --decorate
-  ll = log --pretty="format:'%C(yellow)%h %C(blue)[%aN] %C(auto)%G?%d %C(white)%s'" --decorate --numstat
-  ld = log --pretty="format:'%C(yellow)%h %C(cyan)[%ad] %C(blue)[%aN] %C(auto)%G?%d %C(white)%s'" --decorate --date=short
-  ldr = log --pretty="format:'%C(yellow)%h %C(cyan)[%ad] %C(blue)[%aN] %C(auto)%G?%d %C(white)%s'" --decorate --date=relative
-  lol = log --pretty="format:'%C(yellow)%h %C(blue)[%aN] %C(auto)%G?%d %C(white)%s'" --decorate --graph
+  ls = log --pretty="format:'%C(yellow)%h %C(blue)[%aN] %C(white)%G?%C(auto)%d %C(normal)%s'" --decorate
+  l = "!git ls"
+  ll = "!git ls --numstat"
+  ld = log --pretty="format:'%C(yellow)%h %C(cyan)[%ad] %C(blue)[%aN] %C(white)%G?%C(auto)%d %C(normal)%s'" --decorate --date=short
+  ldr = log --pretty="format:'%C(yellow)%h %C(cyan)[%ad] %C(blue)[%aN] %C(white)%G?%C(auto)%d %C(normal)%s'" --decorate --date=relative
+  lol = "!git ls --graph"
   lnc = log --pretty="format:'%h [%aN] %G?%d %s'" # No colors, for piping
 
   # Find
