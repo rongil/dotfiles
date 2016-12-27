@@ -139,6 +139,7 @@ alias feh='feh --auto-zoom --scale-down' # Adjust size for tiled windows
 alias l='ls'
 alias la='ls -A' # Convenient for listing hidden files
 alias ll='ls -alh' # Convenient for long listings
+alias less='less -x4' # Set tab stop to 4
 alias open='xdg-open'
 alias view='vim -R'
 alias vimu="vim --cmd ':let g:Persistent_Undo_Off=1'" # Run vim without persistent undo
