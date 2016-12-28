@@ -185,9 +185,9 @@ bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 10"
 bindsym XF86MonBrightnessUp   exec --no-startup-id "xbacklight -inc 10"
 
 # Volume keys
-bindsym XF86AudioMute exec --no-startup-id "amixer -q sset Master toggle"
-bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q sset Master 3%- unmute"
-bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q sset Master 3%+ unmute"
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ -3%"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ +3%"
 
 # Force kill window
 bindsym --release $mod+Control+x exec --no-startup-id xkill
