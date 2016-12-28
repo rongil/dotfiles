@@ -35,12 +35,16 @@ ethernet _first_ {
 }
 
 battery 0 {
-    #format = " %percentage %remaining %emptytime"
     align = "center"
-    format = "🔋 %status %percentage"
-    min_width = "130"
+    format = "%status %percentage (%emptytime %consumption)"
+    status_chr = "⚡"
+    status_bat = "🔋"
+    status_full = "✓"
+    min_width = "50"
     path = "/sys/class/power_supply/BAT0/uevent"
-    low_threshold = 10
+    low_threshold = 15
+    integer_battery_capacity = true
+    hide_seconds = true
 }
 
 tztime local_date {
