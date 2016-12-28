@@ -40,7 +40,6 @@ battery 0 {
     status_chr = "⚡"
     status_bat = "🔋"
     status_full = "✓"
-    min_width = "50"
     path = "/sys/class/power_supply/BAT0/uevent"
     low_threshold = 15
     integer_battery_capacity = true
