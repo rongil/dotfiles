@@ -44,6 +44,7 @@ battery 0 {
     low_threshold = 15
     integer_battery_capacity = true
     hide_seconds = true
+    min_width = 210
 }
 
 tztime local_date {
