@@ -1,0 +1,238 @@
+#!/bin/bash
+
+#################################################################################
+# Constants
+#################################################################################
+REGULAR_USER=rongil
+DEPENDENCIES=(dhcpcd ip iw wpa_supplicant)
+
+# Grabs only the first interface if there are multiple
+ETH_INTERFACE=$(ip link show | grep -Eom 1 'enp[^:]+')
+WIFI_INTERFACE=$(ip link show | grep -Eom 1 'wlp[^:]+')
+
+# Configuration
+WPA_SUPP_CONF_PATH="/etc/wpa_supplicant/wpa_supplicant.conf"
+
+# Help output (GNU-styled)
+SCRIPT_NAME=$(basename "$0")
+USAGE_ONELINE="Usage: $SCRIPT_NAME OPTION"
+USAGE_SHORT="$USAGE_ONELINE
+Try $SCRIPT_NAME --help for more information."
+USAGE="$USAGE_ONELINE
+Options:
+  -a, --add         Add a protected wifi network.
+  -c, --connect     Connect to a wifi network based on current configuration.
+  -d, --disconnect  Disconnect all wifi connections.
+  -h, --help        Show the help menu.
+  -l, --list        Scan for wifi networks and list them.
+  -p, --public      Connect to a public wifi network.
+  -r, --restart     Restart the wifi connection.
+  -s, --switch      Toggle ethernet and wifi."
+
+# Bold and normal text values
+BOLD=$(tput bold)
+NORMAL=$(tput sgr0)
+
+#################################################################################
+# Helper functions
+#################################################################################
+# Surrounds argument in double quotes
+surround () {
+  echo '"'"$1"'"'
+}
+
+# Bolds text
+bold () {
+  echo "${BOLD}$1${NORMAL}"
+}
+
+run_as_root () {
+  if [[ $EUID != 0 ]]; then
+    echo 'Must be run as root.'
+    exit 1
+  else
+    "$1"
+  fi
+}
+
+run_as_user () {
+  if [[ $EUID == 0 ]]; then
+    sudo -u $REGULAR_USER net $2
+  else
+    "$1"
+  fi
+}
+
+check_dependencies () {
+  for dep in "${DEPENDENCIES[@]}"; do
+    hash $dep 2>/dev/null || { echo "Missing $dep!"; exit 1; }
+  done
+}
+
+#################################################################################
+# Functions
+#################################################################################
+
+#********************************************************************************
+# Adds a new wifi connection.
+#********************************************************************************
+wifi_add () {
+  wifi_list
+  # Collect all needed info from user
+  read -p "$(bold Network:) " network
+  read -p "$(bold Identity:) " identity
+  read -sp "$(bold Password:) " password
+  echo # Insert newline for next prompt
+
+  # Create a string of the new entry
+  new_entry="\n"
+  new_entry+="network={"
+  new_entry+="\n\t"
+  new_entry+="ssid=$(surround "$network")"
+  new_entry+="\n"
+
+  # Don't add these entries if nothing was provided
+  if [ -n "$identity" ]; then
+    new_entry+="\t"
+    new_entry+="identity=$(surround "$identity")"
+    new_entry+="\n"
+  fi
+
+  new_entry+="\t"
+  new_entry+="password=$(surround "$password")"
+  new_entry+="\n\t"
+  new_entry+="psk=$(surround "$password")" # Needed by some networks (e.g. eduroam)
+  new_entry+="\n"
+
+  new_entry+="}"
+
+  # Write to file and write a success message without the password :)
+  echo -e "$new_entry" | sudo tee -a $WPA_SUPP_CONF_PATH | sed -re "s/((password|psk)=\")[^\"]+/\1******/" -e "1a\\Successfully Added:"
+}
+
+#********************************************************************************
+# Tries to connect to a wifi connection.
+#********************************************************************************
+wifi_connect () {
+  # Activate the interface (if necessary)
+  sudo ip link set $WIFI_INTERFACE up
+  # Initiate the connection
+  sudo wpa_supplicant -B -i $WIFI_INTERFACE -c $WPA_SUPP_CONF_PATH
+  # Lease an IP address
+  sudo dhcpcd $WIFI_INTERFACE
+}
+
+#********************************************************************************
+# Disconnects wifi connection.
+#********************************************************************************
+wifi_disconnect () {
+  sudo pkill wpa_supplicant
+  sudo pkill dhcpcd
+  [[ -n "$1" ]] && sudo ip link set $WIFI_INTERFACE down
+}
+
+#********************************************************************************
+# Lists the available wifi networks.
+#********************************************************************************
+wifi_list () {
+  # Filter out ID, Encryption (y/n), Signal Strength and sort based on signal strength
+  # --------------------------------- Explanation ---------------------------------
+  # 1 - Scan for available networks (iwlist)
+  # 2 - Isolate only the desired properties (grep)
+  # 3 - Remove double dashes from grep + remove ESSID prefix and bold names (sed)
+  #   NOTE: Can't put backreference in command substitution (maybe?), so using literal
+  # 4 - Merge group of lines into one line for sorting (paste)
+  # 5 - Sort based on signal strength and network name (sort)
+  #   NOTE: Signal strength sorting is needed here to avoid keeping a dupe with lower signal
+  # 6 - Remove duplicate entries of the same network (uniq)
+  # 7 - Resort based only on signal strength (sort)
+  #   NOTE: Signal strength is ordered in increasing order here in expectation of file reversal later
+  # 8 - Resplit the groups of lines (xargs)
+  # 9 - Reverse the results so the network name shows up first (tac)
+  # 10 - Remove extra whitespace at top of final output (tail)
+  # -------------------------------------------------------------------------------
+  networks=$(
+    sudo iwlist $WIFI_INTERFACE scan |
+    grep "ESSID" -B2 |
+    sed -e '4~4c\ ' -re "s/ESSID:\"(.+)\"/${BOLD}\1${NORMAL}/" |
+    paste - - - - |
+    sort -t $'\t' -k1n -k3d -r |
+    uniq -f 3 |
+    sort -t $'\t' -k1n |
+    xargs -d $'\t' -n 1 |
+    tac |
+    tail -n +2
+  )
+
+  # Print the list of nicely ordered networks
+  # -X to keep output in terminal after exit, -R for bold escape character interpretation
+  echo "$networks" | less -RX
+}
+
+#********************************************************************************
+# Connect to a public wifi network.
+#********************************************************************************
+wifi_public () {
+  wifi_disconnect
+  sudo iw dev $WIFI_INTERFACE connect "$1"
+  sudo dhcpcd
+}
+
+#********************************************************************************
+# Restarts wifi connection.
+#********************************************************************************
+wifi_restart () {
+  wifi_disconnect
+  wifi_connect
+}
+
+#********************************************************************************
+# Switches between wifi and wired connection.
+#********************************************************************************
+net_switch () {
+  if [[ -n $(ip link show $WIFI_INTERFACE | grep -om 1 "UP") ]]; then
+    sudo ip link set $ETH_INTERFACE up
+    sudo dhcpcd $ETH_INTERFACE && sudo ip link set $WIFI_INTERFACE down
+  else
+    sudo ip link set $WIFI_INTERFACE up
+    sudo ip link set $ETH_INTERFACE down
+  fi
+}
+
+
+
+#********************************************************************************
+# Parse args and execute
+#********************************************************************************
+check_dependencies
+
+while (( $# > 0 )); do
+  case "$1" in
+    -a|--add) run_as_user wifi_add "$1"
+      exit 0;;
+    -c|--connect) run_as_root wifi_connect
+      exit 0;;
+    -d|--disconnect) run_as_root wifi_disconnect
+      exit 0;;
+    -h) echo "$USAGE_SHORT"
+      exit 0;;
+    --help) echo "$USAGE"
+      exit 0;;
+    -l|--list) run_as_root wifi_list
+      exit 0;;
+    -p|--public) run_as_root wifi_public "$2"
+      shift
+      exit 0;;
+    -r|--restart) run_as_root wifi_restart
+      exit 0;;
+    -s|--switch) run_as_root net_switch
+      exit 0;;
+    *) echo "Unknown parameter."
+      echo "$USAGE_SHORT"
+      exit 1;;
+  esac
+
+  shift
+done
+
+echo "$USAGE_SHORT"
