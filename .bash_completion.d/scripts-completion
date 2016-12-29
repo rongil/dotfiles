@@ -12,7 +12,7 @@ autocomplete () {
 }
 
 # Set autocompletion for all (readable AND executable) scripts in scripts folder
-for script in $HOME/scripts/* ; do
+for script in $HOME/scripts/bash/* ; do
   if [ -x $script ]; then
     autocomplete $script
   fi

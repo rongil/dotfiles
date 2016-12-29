@@ -47,7 +47,7 @@ HISTFILESIZE=50000
 # If created as a copy of an interactive shell, don't add to path again
 # BROWSER is a nonstandard variable set in this file
 if [[ $BROWSER == "" ]]; then
-  PATH=$PATH:$HOME/scripts
+  PATH=$PATH:$HOME/scripts/bash
   export PATH
 fi
 

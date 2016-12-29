@@ -72,6 +72,9 @@ zstyle ':completion:*' squeeze-slashes true
 
 autoload -Uz compinit && compinit
 
+# Autocomplete zsh scripts based on gnu --help
+compdef _gnu_generic $HOME/scripts/zsh/*
+
 # Fill in .. when going up directories
 # Source: zsh-lovers
 rationalise-dot() {
@@ -85,12 +88,11 @@ zle -N rationalise-dot
 bindkey . rationalise-dot
 
 #=====================
-# Custom Completions
+# Custom Bash Completions
 #=====================
 # Handle bash completion
 autoload -Uz bashcompinit && bashcompinit
 
-# Custom user completions
 source $HOME/.bash_completion.d/scripts-completion
 
 #=====================
@@ -114,7 +116,8 @@ setopt hist_verify # Expand history expansions before executing
 # If created as a copy of an interactive shell, don't add to path again
 # BROWSER is a nonstandard variable set later in this file
 if [[ -z "$BROWSER" ]]; then
-  PATH=$PATH:$HOME/scripts
+  PATH=$PATH:$HOME/scripts/zsh # Zsh scripts with same name take priority
+  PATH=$PATH:$HOME/scripts/bash
   export PATH
 fi
 
