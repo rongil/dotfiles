@@ -1,1 +1,4 @@
-Not all scripts in the zsh folder are for zsh only. The distinction is partly for convenience given that I made some of the scripts before switching to zsh (e.g. for zsh autocompletion). The shebangs in the zsh folder appropriately describe whether or not zsh is needed.
+Not all scripts in the zsh folder are for zsh only.
+
+The distinction is partly for convenience given that I made some of the scripts before switching to zsh (e.g. for zsh autocompletion).
+The shebangs in the zsh folder appropriately describe whether or not zsh is needed.
