@@ -39,7 +39,7 @@ battery 0 {
     format = "%status %percentage (%emptytime %consumption)"
     status_chr = "⚡"
     status_bat = "🔋"
-    status_full = "✓"
+    status_full = ""
     path = "/sys/class/power_supply/BAT0/uevent"
     low_threshold = 15
     integer_battery_capacity = true
@@ -52,7 +52,7 @@ tztime local_date {
 }
 
 tztime local_time {
-    format = "🕐 %I:%M%p"
+    format = " %I:%M%p"
 }
 
 load {
