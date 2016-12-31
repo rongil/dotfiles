@@ -25,7 +25,7 @@ bindsym $mod+Shift+c kill
 bindsym $mod+r exec rofi -show run
 
 # workspace variables
-set $WS0 10:0 # Ordered this way due to keyboard layout
+set $WS0 10:0
 set $WS1 1:
 set $WS2 2:
 set $WS3 3
