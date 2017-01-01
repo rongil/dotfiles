@@ -28,7 +28,7 @@ bindsym $mod+r exec rofi -show run
 set $WS0 10:0
 set $WS1 1:
 set $WS2 2:
-set $WS3 3
+set $WS3 3:
 set $WS4 4
 set $WS5 5
 set $WS6 6
@@ -178,10 +178,11 @@ bindsym $notmod+Shift+Tab move container to workspace back_and_forth; workspace 
 workspace $WS9 output VGA-1
 workspace $WS0 output HDMI-1
 
-# Assigned classes
+# Assigned programs
 # ------------------
 assign [class="^Firefox$"] → $WS1
 assign [class="^Thunderbird$"] → $WS2
+assign [class="^Spotify$"] → $WS3
 
 # Custom keybindings
 # ------------------
