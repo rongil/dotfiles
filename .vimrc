@@ -14,7 +14,6 @@ endif
 filetype plugin indent on "Enable file type detection
 
 set wildmenu "Improved tab completion
-set number "Line numbers
 set splitright "Opens new vertical window on right
 set splitbelow "Opens new horizontal window under
 
@@ -30,6 +29,49 @@ set clipboard=unnamed
 
 "Delete comment character when joining commented lines
 set formatoptions+=j
+
+"==============================================================================
+" Line Numbering
+"==============================================================================
+set number "Line numbers
+set relativenumber "Relative line numbers
+"Toggle relative numbers, adapted from:
+"jeetworks.org/from-acolyte-to-adept-the-next-step-after-nop-ing-arrow-keys/
+augroup toggle_relativenumber
+  autocmd!
+  autocmd FocusGained *
+        \ if &number |
+        \   set relativenumber |
+        \ endif
+  autocmd FocusLost *
+        \ if &number |
+        \   set norelativenumber |
+        \ endif
+  autocmd InsertEnter *
+        \ if &number |
+        \   set norelativenumber |
+        \ endif
+  autocmd InsertLeave *
+        \ if &number |
+        \   set relativenumber |
+        \ endif
+  autocmd VimEnter *
+        \ if &number |
+        \   set relativenumber |
+        \ endif
+  autocmd VimLeave *
+        \ if &number |
+        \   set norelativenumber |
+        \ endif
+  autocmd WinEnter *
+        \ if &number |
+        \   set relativenumber |
+        \ endif
+  autocmd WinLeave *
+        \ if &number |
+        \   set norelativenumber |
+        \ endif
+augroup END
 
 "==============================================================================
 " GUI Options (since some applications launch GVim by default)
