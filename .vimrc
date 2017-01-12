@@ -203,8 +203,12 @@ endif
 "==============================================================================
 " Special syntax
 "==============================================================================
-autocmd BufNewFile,BufRead *.bsv set filetype=bsv
-autocmd BufNewFile,BufRead *.ejs set filetype=html
+augroup filetype
+  autocmd!
+  autocmd BufNewFile,BufRead *.bsv set filetype=bsv
+  autocmd BufNewFile,BufRead *.ejs set filetype=html
+  autocmd BufNewFile,BufRead *.ll  set filetype=llvm
+augroup END
 
 "==============================================================================
 " Latex
