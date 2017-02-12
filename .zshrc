@@ -136,6 +136,9 @@ export PYTHONSTARTUP="$HOME/.config/python/pythonrc"
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
+# Force xterm-color over ssh since xterm-termite is typically unavailable
+alias ssh='TERM=xterm-256color ssh'
+
 # Other aliases
 alias config='/usr/bin/git --git-dir=$HOME/.config_store/ --work-tree=$HOME' # Dotfile version control
 alias feh='feh --auto-zoom --scale-down' # Adjust size for tiled windows
