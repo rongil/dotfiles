@@ -72,8 +72,10 @@ zstyle ':completion:*' squeeze-slashes true
 
 autoload -Uz compinit && compinit
 
-# Autocomplete zsh scripts based on gnu --help
-compdef _gnu_generic $HOME/scripts/zsh/*
+# Autocomplete zsh scripts based on gnu formatted --help option
+custom_zsh_scripts_dir=$HOME/scripts/zsh
+[[ -d $custom_zsh_scripts_dir ]] && compdef _gnu_generic $custom_zsh_scripts_dir/*
+unset custom_zsh_scripts_dir
 
 # Fill in .. when going up directories
 # Source: zsh-lovers
@@ -91,9 +93,11 @@ bindkey . rationalise-dot
 # Custom Bash Completions
 #=====================
 # Handle bash completion
-autoload -Uz bashcompinit && bashcompinit
-
-source $HOME/.bash_completion.d/scripts-completion
+custom_bash_completion_scripts=$HOME/.bash_completion.d/scripts-completion
+[[ -f $custom_bash_completion_scripts ]] &&
+  autoload -Uz bashcompinit && bashcompinit &&
+  source $custom_bash_completion_scripts
+unset custom_bash_completion_scripts
 
 #=====================
 # History
