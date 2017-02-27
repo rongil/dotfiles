@@ -9,10 +9,6 @@ xset -b
 xset dpms 0 0 0
 xset s off # Disable screen blanking
 
-# Key mappings
-setxkbmap -option compose:ralt # Right Alt -> Compose key
-setxkbmap -option caps:escape  # Caps Lock -> Esc
-
 # Background
 feh --bg-fill ~/.config/i3/img/wallpapers/dragon_red.jpg
 
