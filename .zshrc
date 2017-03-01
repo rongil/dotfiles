@@ -39,10 +39,18 @@ bindkey -v # Vim keybindings
 export KEYTIMEOUT=1
 
 # Incremental search with up/down
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
-bindkey -M vicmd 'k' up-line-or-search
-bindkey -M vicmd 'j' down-line-or-search
+# (up|down)-line-or-search =
+#   search using first word
+# (up|down)-line-or-beginning-search =
+#   search using string up to cursor
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+bindkey -M vicmd 'k' up-line-or-beginning-search
+bindkey -M vicmd 'j' down-line-or-beginning-search
 
 #=====================
 # Prompt
