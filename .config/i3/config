@@ -244,7 +244,7 @@ bar {
   bindsym button3 exec gsimplecal
 
   position bottom
-  separator_symbol " ⋮ "
+  separator_symbol "  "
   tray_padding 2px
   strip_workspace_numbers yes
   status_command i3status
