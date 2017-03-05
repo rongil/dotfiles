@@ -192,7 +192,8 @@ wifi_restart () {
 net_switch () {
   if [[ -n $(ip link show $WIFI_INTERFACE | grep -om 1 "UP") ]]; then
     sudo ip link set $ETH_INTERFACE up
-    sudo dhcpcd $ETH_INTERFACE && sudo ip link set $WIFI_INTERFACE down
+    sudo dhcpcd $ETH_INTERFACE
+    sudo ip link set $WIFI_INTERFACE down
   else
     sudo ip link set $WIFI_INTERFACE up
     sudo ip link set $ETH_INTERFACE down
