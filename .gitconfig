@@ -10,6 +10,7 @@
 
 [alias]
   # General
+  b = branch
   c = checkout
   d = diff
   ds = diff --staged
