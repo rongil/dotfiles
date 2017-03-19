@@ -25,6 +25,7 @@ Plugin 'sjl/gundo.vim' "Undo tree
 Plugin 'wting/gitsessions.vim' "Git session save
 Plugin 'ctrlpvim/ctrlp.vim' "Fuzzy file finder
 Plugin 'valloric/MatchTagAlways' "Highlight HTML/XML tags
+Plugin 'jeetsukumaran/vim-indentwise' "Indent based movement
 Plugin 'ternjs/tern_for_vim' "Tern JS
 Plugin 'jrozner/vim-antlr' "Antlr 3+4 syntax
 Plugin 'fatih/vim-go' "Go syntax, autocomplete, etc.
