@@ -3,8 +3,7 @@ let g:RootOrTempFile=CheckIfRootOrTemp()
 
 source $HOME/.vim/vundle_plugins.vim
 
-"==============================================================================
-" General Options
+" General Options {{{
 "==============================================================================
 set nocompatible "More useful instead of more compatible :)
 set encoding=utf8
@@ -30,8 +29,8 @@ set clipboard=unnamed
 "Delete comment character when joining commented lines
 set formatoptions+=j
 
-"==============================================================================
-" Line Numbering
+"}}}
+" Line Numbering {{{
 "==============================================================================
 set number "Line numbers
 set relativenumber "Relative line numbers
@@ -73,8 +72,8 @@ augroup toggle_relativenumber
         \ endif
 augroup END
 
-"==============================================================================
-" GUI Options (since some applications launch GVim by default)
+" }}}
+" GUI Options (since some applications launch GVim by default) {{{
 "==============================================================================
 autocmd GUIEnter * set visualbell t_vb= "Don't ring or flash bell in gvim
 if has('gui_running')
@@ -86,16 +85,16 @@ if has('gui_running')
   set guicursor=n:blinkon0 "Don't blink cursor in normal mode
 endif
 
-"==============================================================================
-" Swap File Settings
+" }}}
+" Swap File Settings {{{
 "==============================================================================
 "Only have swap file if file is currently in modified state
 "Source: http://vi.stackexchange.com/a/69
 autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
   \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
 
-"==============================================================================
-" General Mappings
+" }}}
+" General Mappings {{{
 "==============================================================================
 "Default is yy unlike for C and D
 map Y y$
@@ -113,8 +112,8 @@ nnoremap <C-L> :nohl<CR><C-L>
 "Source: http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
 nnoremap K ciW<CR><Esc>:if match( @", "^\\s*$") < 0<Bar>exec "norm P-$diw+"<Bar>endif<CR>
 
-"==============================================================================
-" Indentation
+" }}}
+" Indentation {{{
 "==============================================================================
 "Default Indent
 set autoindent
@@ -131,20 +130,20 @@ let b:verilog_indent_modules = 1
 let g:indent_detector_echolevel_enter=0
 let g:indent_detector_echolevel_write=0
 
-"==============================================================================
-" Folding
+" }}}
+" Folding {{{
 "==============================================================================
 set foldmethod=indent "Sets folds based on indent by default
 set foldnestmax=2 "Max nesting level
 
-"==============================================================================
-" Spell Check
+" }}}
+" Spell Check {{{
 "==============================================================================
 set spelllang=en_us
 autocmd Filetype gitcommit,markdown,tex,text if !&readonly | set spell
 
-"==============================================================================
-" Color Settings
+" }}}
+" Color Settings {{{
 "==============================================================================
 "Color Scheme
 set t_Co=256 "Use 256 colors
@@ -164,8 +163,8 @@ colorscheme jellybeans
 "Transparent background on terminal
 hi Normal ctermbg=NONE
 
-"==============================================================================
-" Text Modification
+" }}}
+" Text Modification {{{
 " Source: http://vim.wikia.com/wiki/Create_underlines,_overlines,_and_strikethroughs_using_combining_characters
 "==============================================================================
 " modify selected text using combining diacritics
@@ -182,15 +181,15 @@ endfunction
 vnoremap  :Strikethrough<CR>
 vnoremap __ :Underline<CR>
 
-"==============================================================================
-" Search
+" }}}
+" Search {{{
 "==============================================================================
 set hlsearch "Search highlighting
 set incsearch "Incremental search
 set magic "Regex: unescaped magic chars are magic chars (rather than literals)
 
-"==============================================================================
-" Persistent Undo
+" }}}
+" Persistent Undo {{{
 "==============================================================================
 " Don't keep persistent history if root-owned file or temp file
 if !g:RootOrTempFile && !exists('g:Persistent_Undo_Off')
@@ -200,8 +199,8 @@ if !g:RootOrTempFile && !exists('g:Persistent_Undo_Off')
   set undoreload=10000 "Maximum number lines to save for undo on a buffer reload
 endif
 
-"==============================================================================
-" Special syntax
+" }}}
+" Special syntax {{{
 "==============================================================================
 augroup filetype
   autocmd!
@@ -210,8 +209,8 @@ augroup filetype
   autocmd BufNewFile,BufRead *.ll  set filetype=llvm
 augroup END
 
-"==============================================================================
-" Latex
+" }}}
+" Latex {{{
 "==============================================================================
 let g:Tex_Flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf' "Latex compile to pdf
@@ -220,13 +219,13 @@ let g:Tex_ViewRule_pdf='zathura'
 let g:Tex_CompileRule_pdf='mkdir -p build; pdflatex -output-directory build -interaction=nonstopmode $*; cp build/*.pdf .'
 autocmd BufWritePost,FileWritePost *.tex silent call Tex_RunLaTeX()
 
-"==============================================================================
-" PySolve (Not through Vundle)
+" }}}
+" PySolve (Not through Vundle) {{{
 "==============================================================================
 imap <silent> <F3> <C-O>:call PySolve(0)<CR>
 
-"==============================================================================
-" Vim-Go
+" }}}
+" Vim-Go {{{
 "==============================================================================
 "let g:go_fmt_autosave = 0 "Closes all folds due to buffer rewrite
 let g:go_bin_path = expand('~/.vim/go')
@@ -236,19 +235,19 @@ au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <leader>f :<C-u>GoFmt<CR>
 
-"==============================================================================
-" Tern JS
+" }}}
+" Tern JS {{{
 "==============================================================================
 let g:tern_show_argument_hints='on_hold'
 
-"==============================================================================
-" SplitJoin
+" }}}
+" SplitJoin {{{
 "==============================================================================
 let g:splitjoin_split_mapping = 'gK'
 let g:splitjoin_join_mapping = 'gJ'
 
-"==============================================================================
-" Syntastic
+" }}}
+" Syntastic {{{
 "==============================================================================
 let g:syntastic_always_populate_loc_list = 1 "Always fill in error list
 let g:syntastic_auto_loc_list = 0 "Auto display errors list
@@ -273,18 +272,18 @@ let g:syntastic_mode_map = {
 noremap <F2> :SyntasticToggleMode<CR>
 inoremap <F2> <C-O>:SyntasticToggleMode<CR>
 
-"==============================================================================
-" MatchTagAlways
+" }}}
+" MatchTagAlways {{{
 "==============================================================================
 nnoremap <leader>% :MtaJumpToOtherTag<CR>
 
-"==============================================================================
-" Ragtag
+" }}}
+" Ragtag {{{
 "==============================================================================
 let g:ragtag_global_maps = 1 "Use provided default mappings
 
-"==============================================================================
-" NERD Commenter
+" }}}
+" NERD Commenter {{{
 "==============================================================================
 map gc <plug>NERDCommenterToggle
 
@@ -307,8 +306,8 @@ let g:NERDCommentEmptyLines = 1
 "Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-"==============================================================================
-" NERD Tree
+" }}}
+" NERD Tree {{{
 "==============================================================================
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
@@ -322,13 +321,13 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-"==============================================================================
-" Gundo Undo Tree
+" }}}
+" Gundo Undo Tree {{{
 "==============================================================================
 nnoremap <F5> :GundoToggle<CR>
 
-"==============================================================================
-" Airline Status bar
+" }}}
+" Airline Status bar {{{
 "==============================================================================
 set laststatus=2 "Always show statusline
 let g:airline_powerline_fonts=1 "Populate airline symbols dict
@@ -336,3 +335,7 @@ let g:airline_theme='jellybeans'
 
 "Smarter tab line (show buffers when there's only one tab)
 let g:airline#extensions#tabline#enabled=1
+
+" }}}
+
+" vim:foldmethod=marker:foldlevel=0
