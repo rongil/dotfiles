@@ -18,4 +18,8 @@ compton -b
 # Start ssh agent
 eval $(ssh-agent)
 
+# Start gnome-keyring daemon
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
+export SSH_AUTH_SOCK
+
 exec i3
