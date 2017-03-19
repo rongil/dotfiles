@@ -253,6 +253,7 @@ bar {
 
 # Autostart
 # ------------------
+exec --no-startup-id "sleep 2; singleton nm-applet" # For tray icon to show after Dropbox
 exec --no-startup-id mydropbox enable # Dropbox checks if this is the first instance
 exec --no-startup-id singleton dunst
 exec --no-startup-id singleton clipster -d
