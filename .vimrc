@@ -273,6 +273,18 @@ noremap <F2> :SyntasticToggleMode<CR>
 inoremap <F2> <C-O>:SyntasticToggleMode<CR>
 
 " }}}
+" Silver Surfer (Faster search) {{{
+" Source: https://robots.thoughtbot.com/faster-grepping-in-vim
+"==============================================================================
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" }}}
 " MatchTagAlways {{{
 "==============================================================================
 nnoremap <leader>% :MtaJumpToOtherTag<CR>
