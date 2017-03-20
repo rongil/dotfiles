@@ -1,6 +1,9 @@
 # Load Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
+# Activate numlock
+numlockx&
+
 # Turn off bell
 xset -b
 
