@@ -140,7 +140,7 @@ set foldnestmax=2 "Max nesting level
 " Spell Check {{{
 "==============================================================================
 set spelllang=en_us
-autocmd Filetype gitcommit,markdown,tex,text if !&readonly | set spell
+autocmd Filetype gitcommit,markdown,tex,text if !&readonly | set spell | endif
 
 " }}}
 " Color Settings {{{

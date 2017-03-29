@@ -125,7 +125,8 @@ set foldnestmax=2 "Max nesting level
 " Spell Check {{{
 "==============================================================================
 set spelllang=en_us
-autocmd general Filetype gitcommit,markdown,tex,text if !&readonly | set spell
+autocmd general Filetype gitcommit,markdown,tex,text
+      \ if !&readonly | set spell | endif
 
 " }}}
 " Color Settings {{{
@@ -174,7 +175,7 @@ set undoreload=10000 "Maximum number lines to save for undo on a buffer reload
 augroup persistent_undo
   autocmd!
   autocmd BufEnter,BufRead * if !CheckIfRootOrTemp() &&
-        \ !exists('g:persistent_undo_off') | set undofile
+        \ !exists('g:persistent_undo_off') | set undofile | endif
 augroup END
 
 " }}}
