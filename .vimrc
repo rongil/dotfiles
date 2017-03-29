@@ -192,7 +192,7 @@ set magic "Regex: unescaped magic chars are magic chars (rather than literals)
 " Persistent Undo {{{
 "==============================================================================
 " Don't keep persistent history if root-owned file or temp file
-if !g:RootOrTempFile && !exists('g:Persistent_Undo_Off')
+if !g:RootOrTempFile && !exists('g:persistent_undo_off')
   set undodir=~/.vim/undodir
   set undofile
   set undolevels=1000 "Maximum number of changes that can be undone

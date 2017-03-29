@@ -159,8 +159,9 @@ alias la='ls -A' # Convenient for listing hidden files
 alias ll='ls -alh' # Convenient for long listings
 alias less='less -x4' # Set tab stop to 4
 alias open='xdg-open'
+(( $+commands[nvim] )) && alias vim='nvim' # Use Neovim if installed
 alias view='vim -R'
-alias vimu="vim --cmd ':let g:Persistent_Undo_Off=1'" # Run vim without persistent undo
+alias vimu="vim --cmd ':let g:persistent_undo_off=1'" # Run vim without persistent undo
 alias vimy="vim --cmd ':let g:YCM_On=1'" # Run vim with auto completer on
 alias vimscratch="vimu /tmp/scratch_files/`date +%F_%H-%M-%S` --noplugin -c 'syntax off' -c 'set noswapfile'"
 
