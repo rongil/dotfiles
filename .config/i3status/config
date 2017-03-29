@@ -1,6 +1,7 @@
 #i3status config
 general {
     output_format= "i3bar"
+    markup = pango
     colors = true
     color_good      = '#228B22'
     color_degraded  = '#FFD700'
@@ -20,7 +21,6 @@ order += "cpu_temperature 3"
 order += "load"
 order += "battery 0"
 order += "tztime local_time"
-order += "tztime local_date"
 
 # Note: commented out format means use default
 
@@ -30,7 +30,7 @@ wireless _first_ {
 }
 
 ethernet _first_ {
-    # if you use %speed, i3status requires root privileges
+    # if you use %speed, i3status requires the cap_net_admin capability
     format_up = "⚼ %ip (%speed)"
     format_down = ""
 }
@@ -41,59 +41,75 @@ path_exists VPN {
     path = "/proc/sys/net/ipv4/conf/tun0"
 }
 
-battery 0 {
-    align = "center"
-    format = "%status %percentage (%emptytime %consumption)"
-    status_chr = "⚡"
-    status_bat = "🔋"
-    status_full = ""
-    path = "/sys/class/power_supply/BAT0/uevent"
-    low_threshold = 15
-    integer_battery_capacity = true
-    hide_seconds = true
-    min_width = 210
-}
-
-tztime local_date {
-    format = "%a %b %d"
-}
-
-tztime local_time {
-    format = " %I:%M%p"
-}
-
-load {
-    format = "%1min"
-}
-
-cpu_usage {
-    format = "␍ %usage"
-}
-
 volume master {
-    format = "🔊 %volume"
+    format = "<span foreground='#CE7600'>🔊 %volume</span>"
     format_muted = "🔇 %volume"
     device = "default"
     mixer = "Master"
     mixer_idx = 0
 }
 
+cpu_usage {
+    format = "␍ %usage"
+    # format_above_threshold = "␍ %usage"
+    max_threshold = 75
+    separator_block_width = 20
+}
+
 cpu_temperature 0 {
     format = "%degrees°C"
+    # format_above_threshold = "%degrees°C"
+    max_threshold = 70
+    separator_block_width = 20
     path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp2_input"
 }
 
 cpu_temperature 1 {
     format = "%degrees°C"
+    # format_above_threshold = "%degrees°C"
+    max_threshold = 70
+    separator_block_width = 20
     path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp3_input"
 }
 
 cpu_temperature 2 {
     format = "%degrees°C"
+    # format_above_threshold = "%degrees°C"
+    max_threshold = 70
+    separator_block_width = 20
     path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp4_input"
 }
 
 cpu_temperature 3 {
     format = "%degrees°C"
+    # format_above_threshold = "%degrees°C"
+    max_threshold = 70
+    separator_block_width = 20
     path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp5_input"
+}
+
+load {
+    format = "%1min"
+    # format_above_threshold = "%1min"
+    max_threshold = "2"
+}
+
+battery 0 {
+    align = "center"
+    format = "%status <span foreground='#C0C080'>%percentage (%consumption)</span>"
+    status_chr = "<span foreground='#FFC000'></span>"
+    status_bat = "🔋"
+    status_full = "<span foreground='#80C000'></span>"
+    status_unk = ""
+    path = "/sys/class/power_supply/BAT0/uevent"
+    low_threshold = 10
+    threshold_type = percentage
+    integer_battery_capacity = true
+    hide_seconds = true
+    min_width = 150
+}
+
+tztime local_time {
+    format = "<span foreground='#E0E0E0'>%time</span>"
+    format_time = " %I:%M%p   %a %b %d "
 }
