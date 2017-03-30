@@ -191,6 +191,7 @@ augroup END
 " }}}
 " Latex {{{
 "==============================================================================
+" vim-latex
 let g:Tex_Flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf' "Latex compile to pdf
 let g:Tex_ViewRule_pdf='zathura'
@@ -198,14 +199,15 @@ let g:Tex_ViewRule_pdf='zathura'
 let g:Tex_CompileRule_pdf='mkdir -p build; pdflatex -output-directory build -interaction=nonstopmode $*; cp build/*.pdf .'
 autocmd general BufWritePost,FileWritePost *.tex silent call Tex_RunLaTeX()
 
+" vimtex
+" let g:vimtex_fold_enabled = 1
+" let g:vimtex_view_method = 'zathura'
+" let g:vimtex_latexmk_build_dir = 'build'
+
 "}}}
 " Deoplete {{{
 "==============================================================================
 let g:deoplete#enable_at_startup = 1
-
-" Tab Completion
-inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " set completeopt=longest,menuone,preview
 

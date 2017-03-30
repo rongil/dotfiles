@@ -3,7 +3,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Syntax and Completion
 Plug 'neomake/neomake'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugs' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoinclude.vim'
 " C/C++
 Plug 'zchee/deoplete-clang'
@@ -15,8 +15,14 @@ Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 " Go
 Plug 'fatih/vim-go', { 'tag': '*' }
+"Latex
+Plug 'vim-latex/vim-latex'
 " Vimscript
 Plug 'Shougo/neco-vim'
+
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " NERD Tree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } "NERD Tree git symbols
@@ -35,6 +41,7 @@ Plug 'tpope/vim-repeat' "Repeat plugin commands with .
 Plug 'tpope/vim-surround' "Surround mappings (e.g. swap quote type, parens type, etc.)
 
 " Other
+Plug 'ervandew/supertab' "Tab completion
 Plug 'Raimondi/delimitMate' "Match parentheses
 Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }  "Undo tree
 Plug 'ctrlpvim/ctrlp.vim' "Fuzzy file finder
