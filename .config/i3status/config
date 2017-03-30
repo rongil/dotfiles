@@ -91,7 +91,7 @@ cpu_temperature 3 {
 load {
     format = "%1min"
     # format_above_threshold = "%1min"
-    max_threshold = "2"
+    max_threshold = "3"
 }
 
 battery 0 {
