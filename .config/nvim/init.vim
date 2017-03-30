@@ -191,18 +191,13 @@ augroup END
 " }}}
 " Latex {{{
 "==============================================================================
-" vim-latex
-let g:Tex_Flavor='latex'
-let g:Tex_DefaultTargetFormat='pdf' "Latex compile to pdf
-let g:Tex_ViewRule_pdf='zathura'
-"Place auxilary files in separate folder and copy pdf to main directory
-let g:Tex_CompileRule_pdf='mkdir -p build; pdflatex -output-directory build -interaction=nonstopmode $*; cp build/*.pdf .'
-autocmd general BufWritePost,FileWritePost *.tex silent call Tex_RunLaTeX()
+let g:vimtex_fold_enabled = 1
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_latexmk_build_dir = 'build'
 
-" vimtex
-" let g:vimtex_fold_enabled = 1
-" let g:vimtex_view_method = 'zathura'
-" let g:vimtex_latexmk_build_dir = 'build'
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-f>"
+let g:UltiSnipsJumpBackwardTrigger="<C-d>"
 
 "}}}
 " Deoplete {{{
@@ -222,6 +217,20 @@ let g:deoplete#omni#functions.javascript = [
   \ 'tern#Complete',
   \ 'jspc#omni'
 \]
+
+let g:deoplete#omni#input_patterns = {}
+let g:deoplete#omni#input_patterns.tex = '\\(?:'
+      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+      \ . '|hyperref\s*\[[^]]*'
+      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
+      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ .')'
 
 "}}}
 " Neomake {{{

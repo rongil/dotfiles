@@ -16,7 +16,7 @@ Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 " Go
 Plug 'fatih/vim-go', { 'tag': '*' }
 "Latex
-Plug 'vim-latex/vim-latex'
+Plug 'lervag/vimtex'
 " Vimscript
 Plug 'Shougo/neco-vim'
 
