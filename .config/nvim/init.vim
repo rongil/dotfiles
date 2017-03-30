@@ -204,21 +204,26 @@ let g:UltiSnipsJumpBackwardTrigger="<C-d>"
 "==============================================================================
 let g:deoplete#enable_at_startup = 1
 
-" set completeopt=longest,menuone,preview
+set completeopt=longest,menuone,preview
 
 let g:deoplete#sources = {}
 let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs']
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
 
-"Omnifuncs
-let g:deoplete#omni#functions = {}
+" Omnifuncs
+if !exists('g:deoplete#omni#functions')
+  let g:deoplete#omni#functions = {}
+endif
 let g:deoplete#omni#functions.javascript = [
   \ 'tern#Complete',
   \ 'jspc#omni'
 \]
 
-let g:deoplete#omni#input_patterns = {}
+" Patterns
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
 let g:deoplete#omni#input_patterns.tex = '\\(?:'
       \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
       \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
