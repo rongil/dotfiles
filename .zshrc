@@ -115,8 +115,8 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 setopt appendhistory # Append to history file instead of overwriting
-setopt hist_ignore_dups # Don't store sequential dups
-setopt hist_expire_dups_first # Remove dups before other entries when trimming
+setopt hist_ignore_dups # Don't store sequential dupes
+# setopt hist_expire_dups_first # Remove dups before other entries when trimming
 setopt hist_reduce_blanks # Remove superfluous blanks from commands
 setopt hist_save_no_dups # Don't save any duplicates at all when writing history file
 setopt hist_verify # Expand history expansions before executing
