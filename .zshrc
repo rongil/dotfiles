@@ -182,5 +182,5 @@ mkcd () {
 # Create a new shell in the same directory
 # and dissociate it from the parent process.
 new () {
-  termite &>/dev/null&!
+  termite&!
 }
