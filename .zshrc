@@ -182,7 +182,5 @@ mkcd () {
 # Create a new shell in the same directory
 # and dissociate it from the parent process.
 new () {
-  # Runs as a substitution to avoid the
-  # 'sent to background' + job id output
-  `nohup termite &>/dev/null&`
+  termite &>/dev/null&!
 }
