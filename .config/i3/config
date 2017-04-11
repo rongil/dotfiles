@@ -2,15 +2,22 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
-set $notmod Mod4
-
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #
 # NOTE: Some of the glyphs in this config rely on having a patched font
 # installed. See https://github.com/ryanoasis/nerd-fonts for more details.
 font pango:Monospace Bold 13
+
+# Mod1 = alt, Mod4 = super
+set $mod Mod4
+
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $up k
+set $down j
+set $left h
+set $right l
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -25,7 +32,6 @@ bindsym $mod+Shift+c kill
 bindsym $mod+r exec rofi -show run
 
 # workspace variables
-set $WS0 10:0
 set $WS1 1:
 set $WS2 2:
 set $WS3 3:
@@ -35,40 +41,28 @@ set $WS6 6
 set $WS7 7
 set $WS8 8
 set $WS9 9
+set $WS10 10:0
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-# useful in tabbed mode
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# useful in tabbed mode (particularly for browser windows)
 bindsym $mod+Shift+Tab focus left
 bindsym $mod+Tab focus right
 
-# Conflicts with browser forward + back
-# alternatively, you can use the cursor keys:
-#bindsym $mod+Left focus left
-#bindsym $mod+Down focus down
-#bindsym $mod+Up focus up
-#bindsym $mod+Right focus right
-
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# split in vertical orientation
-bindsym $notmod+j split v
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
 # split in horizontal orientation
-bindsym $notmod+k split h
+bindsym $mod+semicolon split h
+
+# split in vertical orientation
+bindsym $mod+n split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -90,14 +84,18 @@ bindsym $mod+q focus parent
 # focus the child container
 bindsym $mod+w focus child
 
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
 # go to next/prev workspace
-bindsym $notmod+h workspace prev
-bindsym $notmod+l workspace next
-bindsym $notmod+Left workspace prev
-bindsym $notmod+Right workspace next
+bindsym $mod+Control+h workspace prev
+bindsym $mod+Control+l workspace next
 
 # switch to workspace
-bindsym $mod+0 workspace $WS0
 bindsym $mod+1 workspace $WS1
 bindsym $mod+2 workspace $WS2
 bindsym $mod+3 workspace $WS3
@@ -107,15 +105,9 @@ bindsym $mod+6 workspace $WS6
 bindsym $mod+7 workspace $WS7
 bindsym $mod+8 workspace $WS8
 bindsym $mod+9 workspace $WS9
-
-# move to next/prev workspace (and follow container)
-bindsym $notmod+Shift+h move container to workspace prev; workspace prev
-bindsym $notmod+Shift+l move container to workspace next; workspace next
-bindsym $notmod+Shift+Left move container to workspace prev; workspace prev
-bindsym $notmod+Shift+Right move container to workspace next; workspace next
+bindsym $mod+0 workspace $WS10
 
 # move focused container to workspace (and follow container)
-bindsym $mod+Shift+0 move container to workspace $WS0; workspace $WS0
 bindsym $mod+Shift+1 move container to workspace $WS1; workspace $WS1
 bindsym $mod+Shift+2 move container to workspace $WS2; workspace $WS2
 bindsym $mod+Shift+3 move container to workspace $WS3; workspace $WS3
@@ -125,13 +117,14 @@ bindsym $mod+Shift+6 move container to workspace $WS6; workspace $WS6
 bindsym $mod+Shift+7 move container to workspace $WS7; workspace $WS7
 bindsym $mod+Shift+8 move container to workspace $WS8; workspace $WS8
 bindsym $mod+Shift+9 move container to workspace $WS9; workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS10; workspace $WS10
 
 # reload the configuration file
 bindsym $mod+Control+e reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Control+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Control+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -141,23 +134,23 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
+        bindsym h resize shrink width 2 px or 2 ppt
+        bindsym j resize grow height 2 px or 2 ppt
+        bindsym k resize shrink height 2 px or 2 ppt
+        bindsym l resize grow width 2 px or 2 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
+        bindsym Left resize shrink width 2 px or 2 ppt
+        bindsym Down resize grow height 2 px or 2 ppt
+        bindsym Up resize shrink height 2 px or 2 ppt
+        bindsym Right resize grow width 2 px or 2 ppt
 
-        # back to normal: Enter or Escape or Mod+n
+        # back to normal: Enter or Escape or Mod+m
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $mod+n mode "default"
+        bindsym $mod+m mode "default"
 }
-bindsym $mod+n mode "resize"
+bindsym $mod+m mode "resize"
 
 # Style mods
 # ------------------
@@ -170,13 +163,13 @@ hide_edge_borders smart
 # ------------------
 focus_follows_mouse no # Must click for mouse to grab focus of window
 workspace_auto_back_and_forth yes
-bindsym $notmod+Tab workspace back_and_forth
-bindsym $notmod+Shift+Tab move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # Workspace outputs
 # ------------------
 workspace $WS9 output VGA-1
-workspace $WS0 output HDMI-1
+workspace $WS10 output HDMI-1
 
 # Assigned programs
 # ------------------
@@ -205,25 +198,19 @@ bindsym XF86AudioPause exec --no-startup-id "playerctl pause"
 bindsym --release $mod+Control+x exec --no-startup-id xkill
 
 # Calendar
-bindsym $notmod+c exec gsimplecal
+bindsym $mod+c exec gsimplecal
 
 # Clipboard
-bindsym $notmod+i exec clipster -s
+bindsym $mod+p exec clipster -s
 
 # Print screen
 bindsym --release Print exec --no-startup-id "screenshot select"
 bindsym --release Shift+Print exec --no-startup-id "screenshot all"
 
 # Screen control
-bindsym $notmod+z exec --no-startup-id "sctrl lock"
-bindsym $notmod+d exec --no-startup-id "sctrl suspend"
-bindsym $notmod+s exec --no-startup-id "sctrl toggle"
-bindsym $notmod+o exec --no-startup-id "sctrl output"
-
-# Wifi control
-bindsym $notmod+q exec --no-startup-id "sudo net --connect"
-bindsym $notmod+w exec --no-startup-id "sudo net --switch"
-bindsym $notmod+r exec --no-startup-id "sudo net --restart"
+bindsym $mod+z exec --no-startup-id "sctrl lock"
+bindsym $mod+x exec --no-startup-id "sctrl suspend"
+bindsym $mod+o exec --no-startup-id "sctrl output"
 
 # i3bar
 # ------------------
@@ -248,7 +235,6 @@ bar {
   tray_padding 2px
   strip_workspace_numbers yes
   status_command i3status
-  #status_command exec ~/.i3/net-speed # Bar with net speed indicator
 }
 
 # Autostart
