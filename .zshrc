@@ -3,7 +3,7 @@
 #=====================
 setopt extendedglob
 setopt nomatch
-unsetopt beep notify # No bell
+unsetopt beep # No bell
 
 # Command not found hook
 cmdnf_hook_dir=/usr/share/doc/pkgfile/command-not-found.zsh
