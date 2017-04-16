@@ -49,6 +49,8 @@ Plug 'scrooloose/nerdcommenter' "Comment out lines
 Plug 'jeetsukumaran/vim-indentwise' "Indent based movement
 Plug 'airblade/vim-gitgutter' "Git diffs in gutter
 Plug 'andrewradev/splitjoin.vim' "Switch between single/multi-line
+Plug 'suan/vim-instant-markdown' "Markdown preview
+Plug 'https://gitlab.com/rongil/Vim-PySolve' "Python expression evaluator
 
 " Initialize plugin system
 call plug#end()
