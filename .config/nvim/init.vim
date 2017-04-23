@@ -193,7 +193,10 @@ augroup END
 "==============================================================================
 let g:vimtex_fold_enabled = 1
 let g:vimtex_view_method = 'zathura'
-let g:vimtex_latexmk_build_dir = 'build'
+if !exists('g:vimtex_compiler_latexmk')
+  let g:vimtex_compiler_latexmk = {}
+endif
+let g:vimtex_compiler_latexmk.build_dir = 'build'
 
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-f>"
