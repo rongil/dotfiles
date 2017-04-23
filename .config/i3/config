@@ -7,7 +7,7 @@
 #
 # NOTE: Some of the glyphs in this config rely on having a patched font
 # installed. See https://github.com/ryanoasis/nerd-fonts for more details.
-font pango:Monospace Bold 13
+font pango:Knack Nerd Font Bold 13
 
 # Mod1 = alt, Mod4 = super
 set $mod Mod4
