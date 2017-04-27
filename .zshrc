@@ -148,22 +148,31 @@ export PYTHONSTARTUP="$HOME/.config/python/pythonrc"
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
+# Config (dotfile version control)
+alias config='/usr/bin/git --git-dir=$HOME/.config_store/ --work-tree=$HOME'
+
 # Force xterm-color over ssh since xterm-termite is typically unavailable
 alias ssh='TERM=xterm-256color ssh'
 
-# Other aliases
-alias config='/usr/bin/git --git-dir=$HOME/.config_store/ --work-tree=$HOME' # Dotfile version control
-alias feh='feh --auto-zoom --scale-down' # Adjust size for tiled windows
+# ls aliases
 alias l='ls'
 alias la='ls -A' # Convenient for listing hidden files
 alias ll='ls -alh' # Convenient for long listings
-alias less='less -x4' # Set tab stop to 4
-alias open='xdg-open'
+
+# vim aliases
 (( $+commands[nvim] )) && alias vim='nvim' # Use Neovim if installed
 alias view='vim -R'
 alias vimu="vim --cmd ':let g:persistent_undo_off=1'" # Run vim without persistent undo
 alias vimy="vim --cmd ':let g:YCM_On=1'" # Run vim with auto completer on
 alias vimscratch="vimu /tmp/scratch_files/`date +%F_%H-%M-%S` --noplugin -c 'syntax off' -c 'set noswapfile'"
+
+# startx (store logs)
+alias startx='startx >& $HOME/.xsession.$XDG_VTNR.log'
+
+# Other aliases
+alias feh='feh --auto-zoom --scale-down' # Adjust size for tiled windows
+alias less='less -x4' # Set tab stop to 4
+alias open='xdg-open'
 
 #=====================
 # External Functions
