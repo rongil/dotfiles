@@ -139,7 +139,6 @@ fi
 export ANDROID_HOME=/opt/android-sdk
 export BROWSER=firefox
 export EDITOR=vim
-export PYTHONSTARTUP="$HOME/.config/python/pythonrc"
 
 #=====================
 # Aliases
