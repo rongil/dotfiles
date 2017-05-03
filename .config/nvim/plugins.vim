@@ -6,7 +6,7 @@ Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoinclude.vim'
 " C/C++
-Plug 'zchee/deoplete-clang'
+Plug 'tweekmonster/deoplete-clang2'
 " Python
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 " JS
