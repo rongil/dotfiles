@@ -238,10 +238,11 @@ bar {
 }
 
 # Autostart
+# ASC = Automatic Singleton Checking
 # ------------------
 exec --no-startup-id singleton nm-applet
-exec --no-startup-id mydropbox enable # Dropbox checks if this is the first instance
+exec --no-startup-id nextcloud # ASC
 exec --no-startup-id singleton dunst
 exec --no-startup-id singleton clipster -d
 exec --no-startup-id redshift # Just have this on all instances for the eyes' sake...
-exec --no-startup-id xautolock # xautolock checks that it is the only instance
+exec --no-startup-id xautolock # ASC
