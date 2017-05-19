@@ -139,6 +139,7 @@ fi
 export ANDROID_HOME=/opt/android-sdk
 export BROWSER=firefox
 export EDITOR=vim
+export QT_QPA_PLATFORMTHEME=qt5ct
 
 #=====================
 # Aliases
