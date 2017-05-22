@@ -13,7 +13,7 @@ xset dpms 0 0 0
 xset s off # Disable screen blanking
 
 # Background
-feh --bg-fill ~/.config/i3/img/wallpapers/dragon_red.jpg
+feh --bg-fill ~/.config/i3/img/wallpapers/dragon_sky.jpg
 
 # Start composter
 compton -b

@@ -5,5 +5,5 @@ revert() {
 }
 trap revert SIGHUP SIGINT SIGTERM
 xset +dpms dpms 5 5 5
-i3lock -fni ~/.config/i3/img/wallpapers/arch_dark.png
+i3lock -fni ~/.config/i3/img/wallpapers/dragon_red_background_modified.png
 revert
