@@ -20,6 +20,9 @@ Plug 'lervag/vimtex'
 " Vimscript
 Plug 'Shougo/neco-vim'
 
+" Language packs
+Plug 'sheerun/vim-polyglot'
+
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
