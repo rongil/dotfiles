@@ -7,6 +7,9 @@ augroup general
   autocmd!
 augroup END
 
+" Filetypes added in appropriate section(s)
+let g:polyglot_disabled = []
+
 " General Options {{{
 "==============================================================================
 set encoding=utf8
@@ -191,8 +194,11 @@ augroup END
 " }}}
 " Latex {{{
 "==============================================================================
+call add(g:polyglot_disabled, 'latex') " Uses Latex-Box
+
 let g:vimtex_fold_enabled = 1
 let g:vimtex_view_method = 'zathura'
+
 if !exists('g:vimtex_compiler_latexmk')
   let g:vimtex_compiler_latexmk = {}
 endif
@@ -253,6 +259,8 @@ imap <silent> <F3> <C-O>:call PySolve(0)<CR>
 " }}}
 " Vim-Go {{{
 "==============================================================================
+call add(g:polyglot_disabled, 'go')
+
 let g:go_fmt_autosave = 1 "Closes all folds due to buffer rewrite
 let g:go_bin_path = expand('~/.local/share/nvim/go')
 
