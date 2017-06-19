@@ -209,6 +209,11 @@ let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-d>"
 
 "}}}
+" Instant Markdown {{{
+"==============================================================================
+let g:instant_markdown_autostart = 0
+
+" }}}
 " Deoplete {{{
 "==============================================================================
 let g:deoplete#enable_at_startup = 1
