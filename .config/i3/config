@@ -30,6 +30,7 @@ bindsym $mod+Shift+c kill
 
 # start rofi (a program launcher)
 bindsym $mod+r exec rofi -show run
+bindsym $mod+i exec networkmanager_dmenu
 
 # workspace variables
 set $WS1 1:
