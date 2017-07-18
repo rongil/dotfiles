@@ -218,7 +218,7 @@ bindsym $mod+o exec --no-startup-id "sctrl output"
 bar {
 	colors {
     background #000000
-    statusline #A0A0A0
+    statusline #FFCB7C
     separator #555555
 
     focused_workspace  #000000 #303030 #477AB3

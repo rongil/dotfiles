@@ -3,9 +3,9 @@ general {
     output_format= "i3bar"
     markup = pango
     colors = true
-    color_good      = '#228B22'
-    color_degraded  = '#FFD700'
-    color_bad       = '#DC143C'
+    color_good        = '#0C9C32'
+    color_degraded    = '#F6CB34'
+    color_bad         = '#D12610'
     interval = 2
 }
 
@@ -42,7 +42,7 @@ path_exists VPN {
 }
 
 volume master {
-    format = "<span foreground='#CE7600'>🔊 %volume</span>"
+    format = "<span foreground='#6B98CB'>🔊 %volume</span>"
     format_muted = "🔇 %volume"
     device = "default"
     mixer = "Master"
@@ -50,59 +50,62 @@ volume master {
 }
 
 cpu_usage {
-    format = "␍ %usage"
-    # format_above_threshold = "␍ %usage"
+    format = "<span foreground='#A0A0A0'>␍ %usage</span>"
+    format_above_threshold = "<span foreground='#D12610'>␍ %usage</span>"
     max_threshold = 75
     separator_block_width = 20
 }
 
 cpu_temperature 0 {
-    format = "%degrees°C"
-    # format_above_threshold = "%degrees°C"
+    format = "<span foreground='#A0A0A0'>%degrees°C</span>"
+    format_above_threshold = "<span foreground='#D12610'>%degrees°C</span>"
     max_threshold = 70
     separator_block_width = 20
     path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp2_input"
 }
 
 cpu_temperature 1 {
-    format = "%degrees°C"
-    # format_above_threshold = "%degrees°C"
+    format = "<span foreground='#A0A0A0'>%degrees°C</span>"
+    format_above_threshold = "<span foreground='#D12610'>%degrees°C</span>"
     max_threshold = 70
     separator_block_width = 20
     path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp3_input"
 }
 
 cpu_temperature 2 {
-    format = "%degrees°C"
-    # format_above_threshold = "%degrees°C"
+    format = "<span foreground='#A0A0A0'>%degrees°C</span>"
+    format_above_threshold = "<span foreground='#D12610'>%degrees°C</span>"
     max_threshold = 70
     separator_block_width = 20
     path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp4_input"
 }
 
 cpu_temperature 3 {
-    format = "%degrees°C"
-    # format_above_threshold = "%degrees°C"
+    format = "<span foreground='#A0A0A0'>%degrees°C</span>"
+    format_above_threshold = "<span foreground='#D12610'>%degrees°C</span>"
     max_threshold = 70
     separator_block_width = 20
     path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp5_input"
 }
 
 load {
-    format = "%1min"
-    # format_above_threshold = "%1min"
-    max_threshold = "3"
+    format = "<span foreground='#A0A0A0'>%1min</span>"
+    format_above_threshold = "<span foreground='#D12610'>%1min</span>"
+    max_threshold = "4"
 }
 
 battery 0 {
     align = "center"
-    format = "%status <span foreground='#C0C080'>%percentage (%consumption)</span>"
-    status_chr = "<span foreground='#FFC000'></span>"
-    status_bat = "🔋"
-    status_full = "<span foreground='#80C000'></span>"
-    status_unk = ""
+    format = "%status %percentage (%consumption)</span>"
+    format_down = "<span foreground='#D12610'>No Battery</span>"
+    status_chr = "<span foreground='#F6CB34'>"
+    # Takes the statusline color so the low threshold color
+    # gets applied since 'foreground' can't be overriden.
+    status_bat = "<span>🔋"
+    status_full = "<span foreground='#0C9C32'>"
+    status_unk = "<span foreground='#8D70D0'>"
     path = "/sys/class/power_supply/BAT0/uevent"
-    low_threshold = 10
+    low_threshold = 15
     threshold_type = percentage
     integer_battery_capacity = true
     hide_seconds = true
@@ -110,6 +113,6 @@ battery 0 {
 }
 
 tztime local_time {
-    format = "<span foreground='#E0E0E0'>%time</span>"
+    format = "<span foreground='#CBCBCB'>%time</span>"
     format_time = " %I:%M%p   %a %b %d "
 }
