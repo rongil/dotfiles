@@ -15,6 +15,7 @@ firefox_create_instance () {
   done
 
   mkdir $destination_dir
+  chmod 0700 $destination_dir
 
   # Copy over real profile and remove the locks + session data
   local profiles=("$HOME/.mozilla/firefox/*.default")
