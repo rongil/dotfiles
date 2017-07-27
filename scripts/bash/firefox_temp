@@ -22,11 +22,11 @@ firefox_create_instance () {
   local src_dir="${profiles[0]}"
 
   cp -r $src_dir/extension{s,-data} $destination_dir
+  cp -r $src_dir/chrome $destination_dir
   cp $src_dir/extensions.{ini,json} $destination_dir
   cp $src_dir/{addons,blocklist*}.json $destination_dir
   cp $src_dir/prefs.js $destination_dir
   cp $src_dir/search.json* $destination_dir
-  cp $src_dir/stylish.sqlite $destination_dir
 
   firefox --profile $destination_dir --no-remote --private-window "about:newtab"&
   wait $!
