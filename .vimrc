@@ -222,7 +222,7 @@ autocmd BufWritePost,FileWritePost *.tex silent call Tex_RunLaTeX()
 " }}}
 " PySolve (Not through Vundle) {{{
 "==============================================================================
-imap <silent> <F3> <C-O>:call PySolve(0)<CR>
+imap <silent> <F3> <C-\><C-O>:call PySolve(0)<CR>
 
 " }}}
 " Vim-Go {{{

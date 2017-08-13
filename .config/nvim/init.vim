@@ -259,7 +259,7 @@ autocmd general BufWritePost * Neomake
 " }}}
 " PySolve {{{
 "==============================================================================
-imap <silent> <F3> <C-O>:call PySolve(0)<CR>
+imap <silent> <F3> <C-\><C-O>:call PySolve(0)<CR>
 
 " }}}
 " Vim-Go {{{
