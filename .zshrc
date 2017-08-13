@@ -111,8 +111,8 @@ unset custom_bash_completion_scripts
 # History
 #=====================
 HISTFILE=$HOME/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=50000
+SAVEHIST=50000
 
 setopt appendhistory # Append to history file instead of overwriting
 setopt hist_ignore_dups # Don't store sequential dupes
