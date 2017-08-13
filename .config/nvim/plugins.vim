@@ -39,6 +39,7 @@ Plug 'vim-airline/vim-airline-themes' "Status bar themes
 
 " Tim Pope Plugs
 Plug 'tpope/vim-endwise' "End functions/structures automatically
+Plug 'tpope/vim-obsession' "Smarter session management
 Plug 'tpope/vim-ragtag' "Tag manipulation mappings (e.g. in HTML, XML, etc.)
 Plug 'tpope/vim-repeat' "Repeat plugin commands with .
 Plug 'tpope/vim-surround' "Surround mappings (e.g. swap quote type, parens type, etc.)
