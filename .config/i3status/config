@@ -25,7 +25,7 @@ order += "tztime local_time"
 # Note: commented out format means use default
 
 wireless _first_ {
-    format_up = "%essid %ip (%quality)"
+    format_up = " %essid %ip (%quality)"
     format_down = ""
 }
 
@@ -114,5 +114,5 @@ battery 0 {
 
 tztime local_time {
     format = "<span foreground='#CBCBCB'>%time</span>"
-    format_time = " %I:%M%p   %a %b %d "
+    format_time = " %a, %b %d   %I:%M%p |"
 }
