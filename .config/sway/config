@@ -6,11 +6,11 @@
 # installed. See https://github.com/ryanoasis/nerd-fonts for more details.
 font pango:Knack Nerd Font Bold 13
 
+# General Variables {{{
+#==============================================================================
 # Mod1 = alt, Mod4 = super
 set $mod Mod4
 
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
 set $left h
 set $down j
 set $up k
@@ -19,24 +19,11 @@ set $right l
 set $term termite
 set $menu dmenu_run
 
-# Wallpaper
 set $wallpaper_dir $HOME/code/images/wallpapers
-output * bg $wallpaper_dir/spots_shadows_background.png fill
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-# start a terminal
-bindsym $mod+Return exec $term
-
-# kill focused window
-bindsym $mod+Shift+c kill
-
-# start launcher
-bindsym $mod+r exec $menu
-bindsym $mod+i exec networkmanager_dmenu
-
-# workspace variables
+# }}}
+# Workspace Variables {{{
+#==============================================================================
 set $WS1 1:
 set $WS2 2:
 set $WS3 3:
@@ -48,59 +35,82 @@ set $WS8 8
 set $WS9 9
 set $WS10 10:0
 
-# change focus
+# }}}
+# Wallpaper {{{
+#==============================================================================
+output * bg $wallpaper_dir/spots_shadows_background.png fill
+
+# }}}
+# Sway Keybindings {{{
+#==============================================================================
+# Reload the configuration file
+bindsym $mod+Control+e reload
+
+# Restart sway in-place
+# bindsym $mod+Control+r restart
+
+# Exit sway
+bindsym $mod+Control+q exit
+
+# }}}
+# Workspace/Window Keybindings {{{
+#==============================================================================
+# Kill focused window
+bindsym $mod+Shift+c kill
+
+# Change focus
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
-# useful in tabbed mode (particularly for browser windows)
+# Useful in tabbed mode (particularly for browser windows)
 bindsym $mod+Shift+Tab focus left
 bindsym $mod+Tab focus right
 
-# move focused window
+# Move focused window
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
-# split in horizontal orientation
+# Split in horizontal orientation
 bindsym $mod+semicolon split h
 
-# split in vertical orientation
+# Split in vertical orientation
 bindsym $mod+n split v
 
-# enter fullscreen mode for the focused container
+# Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+# Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+a layout tabbed
 bindsym $mod+d layout toggle split
 
-# toggle tiling / floating
+# Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+# Change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
+# Focus the parent container
 bindsym $mod+q focus parent
 
-# focus the child container
+# Focus the child container
 bindsym $mod+w focus child
 
-# move the currently focused window to the scratchpad
+# Move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-# go to next/prev workspace
+# Go to next/prev workspace
 bindsym $mod+Control+h workspace prev
 bindsym $mod+Control+l workspace next
 
-# switch to workspace
+# Switch to workspace
 bindsym $mod+1 workspace $WS1
 bindsym $mod+2 workspace $WS2
 bindsym $mod+3 workspace $WS3
@@ -112,7 +122,7 @@ bindsym $mod+8 workspace $WS8
 bindsym $mod+9 workspace $WS9
 bindsym $mod+0 workspace $WS10
 
-# move focused container to workspace (and follow container)
+# Move focused container to workspace (and follow container)
 bindsym $mod+Shift+1 move container to workspace $WS1; workspace $WS1
 bindsym $mod+Shift+2 move container to workspace $WS2; workspace $WS2
 bindsym $mod+Shift+3 move container to workspace $WS3; workspace $WS3
@@ -124,14 +134,51 @@ bindsym $mod+Shift+8 move container to workspace $WS8; workspace $WS8
 bindsym $mod+Shift+9 move container to workspace $WS9; workspace $WS9
 bindsym $mod+Shift+0 move container to workspace $WS10; workspace $WS10
 
-# reload the configuration file
-bindsym $mod+Control+e reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-# bindsym $mod+Control+r restart
-# exit sway
-bindsym $mod+Control+q exit
+# Back and forth workspace switching
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
-# resize window (you can also use the mouse for that)
+# }}}
+# External Program Keybindings {{{
+#==============================================================================
+# Terminal
+bindsym $mod+Return exec $term
+
+# Launchers
+bindsym $mod+r exec $menu
+bindsym $mod+i exec networkmanager_dmenu
+
+# Brightness keys
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
+bindsym XF86MonBrightnessUp   exec --no-startup-id light -A 10
+
+# Volume keys
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -3%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +3%
+
+# Media keys
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPause exec --no-startup-id playerctl pause
+
+# Force kill window
+bindsym --release $mod+Control+x exec --no-startup-id xkill
+
+# Calendar
+bindsym $mod+c exec gsimplecal
+
+# Print Screen
+bindsym --release Print exec --no-startup-id swaygrab -f
+bindsym --release Shift+Print exec --no-startup-id swaygrab
+
+# Screen Control
+bindsym $mod+z exec --no-startup-id swaylock -i $wallpaper_dir/dragon_red_background.png --scaling fill
+
+# }}}
+# Window Resizing {{{
+#==============================================================================
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -157,67 +204,40 @@ mode "resize" {
 }
 bindsym $mod+m mode "resize"
 
-# Style mods
-# ------------------
+# }}}
+# Workspace Options {{{
+#==============================================================================
 # Hide all title bars when not stacked/tabbed
 new_window pixel
+
 # Hide edges if there is only one window
 hide_edge_borders smart
 
-# Workspace mods
-# ------------------
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
 # Must click for mouse to grab focus of window
 focus_follows_mouse no
-workspace_auto_back_and_forth yes
-bindsym $mod+b workspace back_and_forth
-bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
-# Workspace outputs
-# ------------------
+# Switch to previous workspace if same workspace is selected
+workspace_auto_back_and_forth yes
+
+# }}}
+# Assigned Outputs {{{
+#==============================================================================
 workspace $WS9 output VGA-1
 workspace $WS10 output HDMI-1
 
-# Assigned programs
-# ------------------
+# }}}
+# Assigned Programs {{{
+#==============================================================================
 assign [class="^Firefox$"] → $WS1
 assign [class="^Thunderbird$"] → $WS2
 assign [class="^Spotify$"] → $WS3
 
-# Custom keybindings
-# ------------------
-# Brightness keys
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
-bindsym XF86MonBrightnessUp   exec --no-startup-id light -A 10
-
-# Volume keys
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -3%
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +3%
-
-# Media keys
-bindsym XF86AudioPrev exec --no-startup-id playerctl previous
-bindsym XF86AudioNext exec --no-startup-id playerctl next
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
-bindsym XF86AudioPause exec --no-startup-id playerctl pause
-
-# Force kill window
-bindsym --release $mod+Control+x exec --no-startup-id xkill
-
-# Calendar
-bindsym $mod+c exec gsimplecal
-
-# Clipboard
-bindsym $mod+p exec clipster -s
-
-# Print screen
-bindsym --release Print exec --no-startup-id swaygrab -f
-bindsym --release Shift+Print exec --no-startup-id swaygrab
-
-# Screen control
-bindsym $mod+z exec --no-startup-id swaylock -i $wallpaper_dir/dragon_red_background.png --scaling fill
-
-# i3bar
-# ------------------
+# }}}
+# swaybar {{{
+#==============================================================================
 bar {
 	colors {
     background #000000
@@ -241,12 +261,18 @@ bar {
   status_command i3status
 }
 
-# Autostart
-# ------------------
+# }}}
+# Autostart {{{
+#==============================================================================
 exec --no-startup-id singleton nm-applet
 exec --no-startup-id nextcloud
 exec --no-startup-id redshift -m wayland
 
-# General commands
-# ------------------
+# }}}
+# General Commands {{{
+#==============================================================================
 exec --no-startup-id systemctl --user import-environment DISPLAY
+
+# }}}
+
+# vim:ft=i3:foldmethod=marker:foldlevel=0
