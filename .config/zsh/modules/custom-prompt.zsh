@@ -22,7 +22,7 @@ function set_rprompt {
 }
 
 # Git prompt
-source $HOME/.zsh/git.zsh
+source $ZDOTDIR/modules/git.zsh
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 

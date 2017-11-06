@@ -1,4 +1,13 @@
 #=====================
+# Local Variables
+#=====================
+ZDATADIR=$HOME/.local/share/zsh
+[[ -d $ZDATADIR ]] || mkdir -p $ZDATADIR
+
+ZCACHEDIR=$HOME/.cache/zsh
+[[ -d $ZCACHEDIR ]] || mkdir -p $ZCACHEDIR
+
+#=====================
 # General
 #=====================
 setopt extendedglob
@@ -57,13 +66,13 @@ bindkey -M vicmd 'j' down-line-or-beginning-search
 #=====================
 # Perform substitutions within prompts
 setopt prompt_subst
-source $HOME/.zsh/custom-prompt.zsh
+source $ZDOTDIR/modules/custom-prompt.zsh
 
 #=====================
 # Completion
 #=====================
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path $HOME/.zsh/cache
+zstyle ':completion:*' cache-path $ZCACHEDIR/completion_cache
 
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' list-colors ''
@@ -78,7 +87,7 @@ zstyle ':completion:*:kill:*'   force-list always
 # Remove trailing slash for directory arguments
 zstyle ':completion:*' squeeze-slashes true
 
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -d $ZCACHEDIR/zcompdump-$ZSH_VERSION
 
 # Autocomplete zsh scripts based on gnu formatted --help option
 custom_zsh_scripts_dir=$HOME/scripts/zsh
@@ -110,7 +119,7 @@ unset custom_bash_completion_scripts
 #=====================
 # History
 #=====================
-HISTFILE=$HOME/.zsh_history
+HISTFILE=$ZDATADIR/zsh_history
 HISTSIZE=50000
 SAVEHIST=50000
 
@@ -121,25 +130,6 @@ setopt hist_reduce_blanks # Remove superfluous blanks from commands
 setopt hist_save_no_dups # Don't save any duplicates at all when writing history file
 setopt hist_verify # Expand history expansions before executing
 #setopt inc_append_history # Add new lines incrementally instead of on exit
-
-#=====================
-# Path additions
-#=====================
-# If created as a copy of an interactive shell, don't add to path again
-# BROWSER is a nonstandard variable set later in this file
-if [[ -z "$BROWSER" ]]; then
-  PATH=$PATH:$HOME/scripts/zsh # Zsh scripts with same name take priority
-  PATH=$PATH:$HOME/scripts/bash
-  export PATH
-fi
-
-#=====================
-# Variable Exports
-#=====================
-export ANDROID_HOME=/opt/android-sdk
-export BROWSER=firefox
-export EDITOR=vim
-export QT_QPA_PLATFORMTHEME=qt5ct
 
 #=====================
 # Aliases
