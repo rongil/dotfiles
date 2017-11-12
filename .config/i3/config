@@ -103,8 +103,10 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-# Switch workspace to next output (cycles through available outputs)
-bindsym $mod+v move workspace to output right
+# Switch workspace/container to next output
+# Cycles through available outputs
+bindsym $mod+v move container to output right
+bindsym $mod+Shift+v move workspace to output right
 
 # Go to next/prev workspace
 bindsym $mod+Control+h workspace prev
