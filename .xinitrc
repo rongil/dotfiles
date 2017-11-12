@@ -13,16 +13,12 @@ xset dpms 0 0 0
 xset s off # Disable screen blanking
 
 # Background
-feh --bg-fill ~/.config/i3/img/wallpapers/dragon_sky.jpg
+feh --bg-fill ~/code/images/wallpapers/spots_shadows_background.png
 
 # Start composter
 compton -b
 
-# Start ssh agent
-eval $(ssh-agent)
-
-# Start gnome-keyring daemon
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
-export SSH_AUTH_SOCK
+# Provide display to systemd
+dbus-update-activation-environment --systemd DISPLAY
 
 exec i3
