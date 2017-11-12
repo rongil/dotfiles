@@ -106,6 +106,9 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
+# Switch workspace to next output (cycles through available outputs)
+bindsym $mod+v move workspace to output right
+
 # Go to next/prev workspace
 bindsym $mod+Control+h workspace prev
 bindsym $mod+Control+l workspace next
@@ -221,12 +224,6 @@ focus_follows_mouse no
 
 # Switch to previous workspace if same workspace is selected
 workspace_auto_back_and_forth yes
-
-# }}}
-# Assigned Outputs {{{
-#==============================================================================
-workspace $WS9 output VGA-1
-workspace $WS10 output HDMI-1
 
 # }}}
 # Assigned Programs {{{
