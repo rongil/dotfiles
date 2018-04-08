@@ -47,6 +47,8 @@ bindkey -v # Vim keybindings
 # 0.1s delay between mode changes
 export KEYTIMEOUT=1
 
+bindkey '^R' history-incremental-search-backward
+
 # Incremental search with up/down
 # (up|down)-line-or-search =
 #   search using first word
