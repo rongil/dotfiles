@@ -186,7 +186,11 @@ vnoremap __ :Underline<CR>
 "==============================================================================
 set hlsearch "Search highlighting
 set incsearch "Incremental search
-set magic "Regex: unescaped magic chars are magic chars (rather than literals)
+set magic "Regex: don't treat special characters as literals
+
+" Make search case sensitive only if an uppercase letter is included
+set ignorecase
+set smartcase
 
 " }}}
 " Persistent Undo {{{
